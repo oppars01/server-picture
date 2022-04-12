@@ -1,0 +1,5 @@
+"MonitorScreen"
+{
+	"$basetexture" "models/csgo-turkiye_com/plugin/server_picture/csgo-turkiye-picture"
+	"$translucent" 1
+}

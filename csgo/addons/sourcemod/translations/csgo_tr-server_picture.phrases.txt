@@ -1,0 +1,21 @@
+"Phrases"
+{
+    "Console Message"
+	{
+		"en"			"[SM] This command is not used in the console."
+		"tr"			"[SM] Bu komut konsolda kullanılmamaktadır."
+	}
+
+	"Show Picture"
+	{
+		"en"			"[SM] {orange}You can turn off the server picture by typing {darkblue}!serverpicture {orange}."
+		"tr"			"[SM] {darkblue}!serverpicture {orange}yazarak sunucu resmini kapatabilirsiniz."
+	}
+   
+	"Change Client Status"
+	{
+		"en"			"[SM] {orange}The server picture status has been changed for you."
+		"tr"			"[SM] {orange}Sunucu resim durumu size özel olarak değiştirildi."
+	}
+
+}
