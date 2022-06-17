@@ -21,19 +21,19 @@ char s_picture[ PLATFORM_MAX_PATH ];
 int b_client_status [ MAXPLAYERS+1 ] = {true, ...};
 
 public void OnPluginStart() 
-{
-    cv_picture = CreateConVar("sm_server_picture_name", "models/csgo-turkiye_com/plugin/server_picture/csgo-turkiye-picture", "Picture Filename");
-    AutoExecConfig(true, "server_picture","CSGO_Turkiye");
-    GetConVarString(cv_picture, s_picture, sizeof(s_picture));
-    HookConVarChange(cv_picture, OnCvarChanged);
+{ 
     h_client_status = RegClientCookie("server_picture_user_status", "Server Picture User Status", CookieAccess_Private);
     RegConsoleCmd("sm_serverpicture", Server_Picture, "Discord User Register");
     LoadTranslations("csgo_tr-server_picture.phrases.txt");
     for (int i = 1; i <= MaxClients; i++)if (IsValidClient(i)) b_client_status[ i ] = queryCookie(i);
-    HookEvent("player_spawn", Event_PlayerSpawn, EventHookMode_Pre);
+    HookEvent("player_spawn", Event_PlayerSpawn);
 }
 
 public void OnMapStart(){
+    cv_picture = CreateConVar("sm_server_picture_name", "models/csgo-turkiye_com/plugin/server_picture/csgo-turkiye-picture", "Picture Filename");
+    AutoExecConfig(true, "server_picture","CSGO_Turkiye");
+    GetConVarString(cv_picture, s_picture, sizeof(s_picture));
+    HookConVarChange(cv_picture, OnCvarChanged);
     PrecacheDecalAnyDownload(s_picture);
 }
 
@@ -76,11 +76,20 @@ public Action Server_Picture(int client, int args)
 
 public void Event_PlayerSpawn(Event event, const char[] name, bool dontBroadcast) 
 {
-    int client = GetClientOfUserId(event.GetInt("userid"));
-    if(IsValidClient(client)){
-        if(b_client_status[ client ])ShowOverlay(client, s_picture, 0.0);
-        CPrintToChat(client, "%t", "Show Picture");
+    int userid = event.GetInt("userid");
+    int client = GetClientOfUserId(userid);
+    if(IsValidClient(client)){   
+        if(b_client_status[ client ]){
+            CreateTimer(0.3, Timer_Delay, userid);
+            CPrintToChat(client, "%t", "Show Picture");
+        }else CPrintToChat(client, "%t", "Show Picture 2");
     }
+}
+
+public Action Timer_Delay(Handle hTimer, int userid)
+{
+    int client = GetClientOfUserId(userid);
+    if(IsValidClient(client)) ShowOverlay(client, s_picture, 0.0);
 }
 
 bool IsValidClient(int client, bool nobots = true)
