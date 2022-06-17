@@ -11,6 +11,12 @@
 		"en"			"[SM] {orange}You can turn off the server picture by typing {darkblue}!serverpicture {orange}."
 		"tr"			"[SM] {darkblue}!serverpicture {orange}yazarak sunucu resmini kapatabilirsiniz."
 	}
+
+	"Show Picture 2"
+	{
+		"en"			"[SM] {orange}You can turn on the server picture by typing {darkblue}!serverpicture {orange}."
+		"tr"			"[SM] {darkblue}!serverpicture {orange}yazarak sunucu resmini açabilirsiniz."
+	}
    
 	"Change Client Status"
 	{
